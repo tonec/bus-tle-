@@ -1,6 +1,12 @@
 'use strict';
 
-angular.module('mapApp', ['ionic', 'mapApp.map', 'mapApp.more'])
+angular.module('mapApp', [
+	'ionic',
+	'mapApp.globalsService',
+	'mapApp.stopsService',
+	'mapApp.map',
+	'mapApp.more'
+])
 
 .run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
@@ -30,7 +36,7 @@ angular.module('mapApp', ['ionic', 'mapApp.map', 'mapApp.more'])
 	.state('tab', {
 		url: '/tab',
 		abstract: true,
-		templateUrl: 'app/common/tabs.html'
+		templateUrl: 'app/tabs/tabs.html'
 	})
 
 	// Each tab has its own nav history stack:
