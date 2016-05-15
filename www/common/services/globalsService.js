@@ -1,4 +1,4 @@
-angular.module('mapApp.globalsService', [])
+module.exports = angular.module('mapApp.globalsService', [])
 
 .service('globalsService', function() {
 	return {

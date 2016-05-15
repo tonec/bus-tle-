@@ -1,4 +1,4 @@
-angular.module('mapApp.map', ['uiGmapgoogle-maps'])
+module.exports = angular.module('mapApp.map', ['uiGmapgoogle-maps'])
 
 .controller('MapCtrl', function($scope, stopsService) {
 	$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };

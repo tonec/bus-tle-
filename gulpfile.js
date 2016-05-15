@@ -7,15 +7,13 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var jshint = require('gulp-jshint');
-// var browserify = require('browserify');
-// var vinylSource = require('vinyl-source-stream');
+var browserify = require('browserify');
+var vinylSource = require('vinyl-source-stream');
 
 var paths = {
 	sass: ['./scss/**/*.scss'],
 	js: ['./www/app/**/*.js', './www/common/**/*.js']
 };
-
-gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
 	gulp.src('./scss/ionic.app.scss')
@@ -32,7 +30,7 @@ gulp.task('sass', function(done) {
 
 gulp.task('watch', function() {
 	gulp.watch(paths.sass, ['sass']);
-	gulp.watch(paths.js, ['lint']);
+	gulp.watch(paths.js, ['lint', 'browserify']);
 });
 
 gulp.task('install', ['git-check'], function() {
@@ -61,3 +59,12 @@ gulp.task('lint', function() {
 		.pipe(jshint.reporter('default'))
 		.pipe(jshint.reporter('fail'));
 });
+
+gulp.task('browserify', function() {
+	return browserify('./www/app/app.js', {debug: true})
+		.bundle()
+		.pipe(vinylSource('bundle.js'))
+		.pipe(gulp.dest('./www/dist'));
+});
+
+gulp.task('default', ['sass', 'lint', 'browserify', 'watch']);

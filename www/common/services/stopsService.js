@@ -1,4 +1,4 @@
-angular.module('mapApp.stopsService', [])
+module.exports = angular.module('mapApp.stopsService', [])
 
 .service('stopsService', function($http, globalsService) {
 
