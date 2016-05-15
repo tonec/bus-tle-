@@ -9,16 +9,24 @@ var sh = require('shelljs');
 var jshint = require('gulp-jshint');
 var browserify = require('browserify');
 var vinylSource = require('vinyl-source-stream');
+var plumber = require('gulp-plumber');
 
 var paths = {
 	sass: ['./scss/**/*.scss'],
 	js: ['./www/app/**/*.js', './www/common/**/*.js']
 };
 
+var onError = function (err) {
+	gutil.beep();
+	console.log(err);
+};
+
 gulp.task('sass', function(done) {
 	gulp.src('./scss/ionic.app.scss')
 		.pipe(sass())
-		.on('error', sass.logError)
+		.pipe(plumber({
+			errorHandler: onError
+		}))
 		.pipe(gulp.dest('./www/css/'))
 		.pipe(minifyCss({
 			keepSpecialComments: 0
@@ -56,6 +64,9 @@ gulp.task('git-check', function(done) {
 gulp.task('lint', function() {
 	gulp.src(paths.js)
 		.pipe(jshint())
+		.pipe(plumber({
+			errorHandler: onError
+		}))
 		.pipe(jshint.reporter('default'))
 		.pipe(jshint.reporter('fail'));
 });
