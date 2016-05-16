@@ -23,36 +23,43 @@ module.exports = angular.module('mapApp')
 				}
 			})();
 
-			angular.forEach(scope.markers, function(marker) {
+			function setMarkers() {
+				angular.forEach(scope.markers, function(marker) {
 
-				var markerOptions = {
-					position: marker.position,
-					map: map,
-					title: marker.title,
-					icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
-				};
-
-				marker = new google.maps.Marker(markerOptions);
-				bounds.extend(marker.position);
-
-				google.maps.event.addListener(marker, 'click', function () {
-					var infoWindowOptions;
-
-					if (infoWindow !== void 0) {
-						infoWindow.close();
-					}
-
-					infoWindowOptions = {
-						content: marker.title
+					var markerOptions = {
+						position: marker.position,
+						map: map,
+						title: marker.title,
+						icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
 					};
 
-					infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-					infoWindow.open(map, marker);
+					marker = new google.maps.Marker(markerOptions);
+					bounds.extend(marker.position);
+
+					google.maps.event.addListener(marker, 'click', function () {
+						var infoWindowOptions;
+
+						if (infoWindow !== void 0) {
+							infoWindow.close();
+						}
+
+						infoWindowOptions = {
+							content: marker.title
+						};
+
+						infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+						infoWindow.open(map, marker);
+					});
+
 				});
+			}
 
+			scope.$watch(attr.markers, function() {
+				console.log('changed');
+				setMarkers();
+				map.fitBounds(bounds);
+				map.panToBounds(bounds);
 			});
-
-			map.fitBounds(bounds);
 		}
 	};
 });
