@@ -5,8 +5,8 @@ angular.module('geo', []);
 angular.module('mapApp', []);
 angular.module('moreApp', []);
 
-require('../common/services/Globals');
-require('../common/services/Geo');
+require('../common/factories/globals');
+require('../common/factories/geo');
 require('./map/controllers');
 require('./map/directives');
 require('./more/controllers');

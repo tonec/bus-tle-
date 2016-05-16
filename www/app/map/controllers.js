@@ -1,8 +1,8 @@
 module.exports = angular.module('mapApp')
 
-.controller('MapController', function($scope, Globals, Geo) {
+.controller('MapController', function($scope, globals, geo) {
 
-	Geo.getCurrentPosition().then(function(position) {
+	geo.getCurrentPosition().then(function(position) {
 		var coords = position.coords;
 
 		var mapOptions = {

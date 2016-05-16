@@ -1,6 +1,6 @@
 module.exports = angular.module('geo')
 
-.factory('Geo', ['$q', '$window', function($q, $window) {
+.factory('geo', ['$q', '$window', function($q, $window) {
 	return {
 		getCurrentPosition: function() {
 			var deferred = $q.defer();
