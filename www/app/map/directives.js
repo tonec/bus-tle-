@@ -55,5 +55,4 @@ module.exports = angular.module('mapApp')
 			map.fitBounds(bounds);
 		}
 	};
-
 });

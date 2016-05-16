@@ -2,6 +2,24 @@ module.exports = angular.module('mapApp')
 
 .controller('MapController', function($scope, globals, geo, busStops) {
 
+	$scope.refresh = function() {
+		console.log('refresh');
+	};
+
+	// Get position
+	function getPosition() {
+		geo.getCurrentPosition().then(function(position) {
+			console.log(position);
+			$scope.position = position;
+		}, function(error) {
+			alert(error);
+		});
+	}
+
+	// Get local stops
+
+	// Generate markers
+
 	geo.getCurrentPosition().then(function(position) {
 		var coords = position.coords;
 
