@@ -1,16 +1,20 @@
 'use strict';
 
 angular.module('Globals', []);
+angular.module('Geo', []);
 angular.module('MapApp', []);
 angular.module('MoreApp', []);
 
 require('../common/services/Globals');
+require('../common/services/Geo');
 require('./map/controllers');
+require('./map/directives');
 require('./more/controllers');
 
 angular.module('App', [
 	'ionic',
 	'Globals',
+	'Geo',
 	'MapApp',
 	'MoreApp'
 ])

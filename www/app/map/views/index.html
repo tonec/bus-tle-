@@ -1,7 +1,9 @@
 <ion-view view-title="Map">
-	<ion-content class="padding">
+	<ion-content>
 
-		<ui-map center='map.center' zoom='map.zoom'></ui-map>
+		<div class="map-wrap" ng-if="mapOptions">
+			<ui-map options="mapOptions"></ui-map>
+		</div>
 
 	</ion-content>
 </ion-view>
