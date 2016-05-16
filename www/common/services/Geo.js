@@ -1,4 +1,4 @@
-module.exports = angular.module('Geo')
+module.exports = angular.module('geo')
 
 .factory('Geo', ['$q', '$window', function($q, $window) {
 	return {

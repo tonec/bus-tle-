@@ -1,6 +1,6 @@
-module.exports = angular.module('MapApp')
+module.exports = angular.module('mapApp')
 
-.controller('MapCtrl', function($scope, Globals, Geo) {
+.controller('MapController', function($scope, Globals, Geo) {
 
 	Geo.getCurrentPosition().then(function(position) {
 		var coords = position.coords;

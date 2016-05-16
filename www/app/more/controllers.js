@@ -1,3 +1,3 @@
-module.exports = angular.module('MoreApp')
+module.exports = angular.module('moreApp')
 
-.controller('MoreCtrl', function($scope) {});
+.controller('MoreController', function($scope) {});

@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('Globals', []);
-angular.module('Geo', []);
-angular.module('MapApp', []);
-angular.module('MoreApp', []);
+angular.module('globals', []);
+angular.module('geo', []);
+angular.module('mapApp', []);
+angular.module('moreApp', []);
 
 require('../common/services/Globals');
 require('../common/services/Geo');
@@ -11,12 +11,12 @@ require('./map/controllers');
 require('./map/directives');
 require('./more/controllers');
 
-angular.module('App', [
+angular.module('app', [
 	'ionic',
-	'Globals',
-	'Geo',
-	'MapApp',
-	'MoreApp'
+	'globals',
+	'geo',
+	'mapApp',
+	'moreApp'
 ])
 
 .run(function($ionicPlatform) {
@@ -55,7 +55,7 @@ angular.module('App', [
 		views: {
 			'tab-map': {
 				templateUrl: 'app/map/views/index.html',
-				controller: 'MapCtrl'
+				controller: 'MapController'
 			}
 		}
 	})
@@ -65,7 +65,7 @@ angular.module('App', [
 		views: {
 			'tab-more': {
 				templateUrl: 'app/more/views/index.html',
-				controller: 'MoreCtrl'
+				controller: 'MoreController'
 			}
 		}
 	});
