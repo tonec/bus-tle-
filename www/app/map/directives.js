@@ -7,48 +7,52 @@ module.exports = angular.module('mapApp')
 		template: '<div id="gmaps" class="map"></div>',
 		replace: true,
 		scope: {
-			options: '='
+			options: '=',
+			markers: '='
 		},
 		link: function (scope, element, attr) {
 			var map;
+			var infoWindow;
 			var markers = [];
 			var mapOptions = scope.options;
+			var bounds = new google.maps.LatLngBounds();
 
-			function initMap() {
+			(function initMap() {
 				if (map === void 0) {
 					map = new google.maps.Map(element[0], mapOptions);
 				}
-			}
+			})();
 
-			function setMarker(map, position, title, content) {
-				var marker;
+			angular.forEach(scope.markers, function(marker) {
+
 				var markerOptions = {
-					position: position,
+					position: marker.position,
 					map: map,
-					title: title,
+					title: marker.title,
 					icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
 				};
 
 				marker = new google.maps.Marker(markerOptions);
-				markers.push(marker); // add marker to array
+				bounds.extend(marker.position);
 
 				google.maps.event.addListener(marker, 'click', function () {
+					var infoWindowOptions;
 
 					if (infoWindow !== void 0) {
 						infoWindow.close();
 					}
 
-					var infoWindowOptions = {
-						content: content
+					infoWindowOptions = {
+						content: marker.title
 					};
+
 					infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 					infoWindow.open(map, marker);
 				});
-			}
 
-			initMap();
+			});
 
-			setMarker(map, new google.maps.LatLng(51.508515, -0.125487), 'London', 'Just some content');
+			map.fitBounds(bounds);
 		}
 	};
 

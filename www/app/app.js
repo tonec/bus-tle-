@@ -2,11 +2,13 @@
 
 angular.module('globals', []);
 angular.module('geo', []);
+angular.module('busStops', []);
 angular.module('mapApp', []);
 angular.module('moreApp', []);
 
 require('../common/factories/globals');
 require('../common/factories/geo');
+require('../common/factories/busStops');
 require('./map/controllers');
 require('./map/directives');
 require('./more/controllers');
@@ -15,6 +17,7 @@ angular.module('app', [
 	'ionic',
 	'globals',
 	'geo',
+	'busStops',
 	'mapApp',
 	'moreApp'
 ])
