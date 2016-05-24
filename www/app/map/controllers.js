@@ -1,9 +1,9 @@
-module.exports = angular.module('mapApp')
+module.exports = angular.module('mapModule')
 
-.controller('MapController', function($scope, globals, geo, busStops) {
+.controller('MapController', function($scope, geoFactory, busstopsFactory) {
 
 	$scope.refresh = function() {
-		geo.getCurrentPosition().then(function(position) {
+		geoFactory.getCurrentPosition().then(function(position) {
 			var coords = position.coords;
 
 			var mapOptions = {
@@ -15,7 +15,7 @@ module.exports = angular.module('mapApp')
 
 			$scope.mapOptions = mapOptions;
 
-			busStops.getLocal(coords).then(function(response) {
+			busstopsFactory.getLocal(coords).then(function(response) {
 				console.log('Success', response);
 
 				var markers = [];

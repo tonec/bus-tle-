@@ -1,4 +1,4 @@
-module.exports = angular.module('mapApp')
+module.exports = angular.module('mapModule')
 
 .directive('uiMap', function() {
 

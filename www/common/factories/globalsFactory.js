@@ -1,6 +1,6 @@
-module.exports = angular.module('globals')
+module.exports = angular.module('factories')
 
-.factory('globals', function() {
+.factory('globalsFactory', function() {
 	return {
 		app_id: '87990966',
 		app_key: '33a5cf9e54fa727537e4941cb04d81c4',

@@ -1,25 +1,21 @@
 'use strict';
 
-angular.module('globals', []);
-angular.module('geo', []);
-angular.module('busStops', []);
-angular.module('mapApp', []);
-angular.module('moreApp', []);
+angular.module('factories', []);
+angular.module('mapModule', []);
+angular.module('moreModule', []);
 
-require('../common/factories/globals');
-require('../common/factories/geo');
-require('../common/factories/busStops');
+require('../common/factories/globalsFactory');
+require('../common/factories/geoFactory');
+require('../common/factories/busstopsFactory');
 require('./map/controllers');
 require('./map/directives');
 require('./more/controllers');
 
 angular.module('bustleApp', [
 	'ionic',
-	'globals',
-	'geo',
-	'busStops',
-	'mapApp',
-	'moreApp'
+	'factories',
+	'mapModule',
+	'moreModule'
 ])
 
 .run(function($ionicPlatform) {
