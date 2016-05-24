@@ -16,6 +16,7 @@
     "browserify-shim": "^3.8.12",
     "gulp-jasmine": "^2.3.0",
     "gulp-jshint": "^2.0.1",
+    "gulp-karma": "0.0.5",
     "gulp-plumber": "^1.1.0",
     "gulp-util": "^2.2.14",
     "jshint": "^2.9.2",
