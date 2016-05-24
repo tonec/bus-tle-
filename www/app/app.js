@@ -13,7 +13,7 @@ require('./map/controllers');
 require('./map/directives');
 require('./more/controllers');
 
-angular.module('app', [
+angular.module('bustleApp', [
 	'ionic',
 	'globals',
 	'geo',
