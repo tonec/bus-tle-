@@ -1,5 +1,6 @@
 'use strict';
 
+angular.module('services', []);
 angular.module('factories', []);
 angular.module('mapModule', []);
 angular.module('moreModule', []);
@@ -13,6 +14,7 @@ require('./more/controllers');
 
 angular.module('bustleApp', [
 	'ionic',
+	'services',
 	'factories',
 	'mapModule',
 	'moreModule'
