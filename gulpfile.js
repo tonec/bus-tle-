@@ -10,6 +10,7 @@ var jshint = require('gulp-jshint');
 var browserify = require('browserify');
 var vinylSource = require('vinyl-source-stream');
 var plumber = require('gulp-plumber');
+var karma = require('gulp-karma');
 
 var paths = {
 	sass: ['./scss/**/*.scss'],
@@ -36,11 +37,6 @@ gulp.task('sass', function(done) {
 		.on('end', done);
 });
 
-gulp.task('watch', function() {
-	gulp.watch(paths.sass, ['sass']);
-	gulp.watch(paths.js, ['lint', 'browserify']);
-});
-
 gulp.task('install', ['git-check'], function() {
 	return bower.commands.install()
 		.on('log', function(data) {
@@ -49,7 +45,7 @@ gulp.task('install', ['git-check'], function() {
 });
 
 gulp.task('lint', function() {
-	gulp.src(paths.js)
+	return gulp.src(paths.js)
 		.pipe(jshint())
 		.pipe(plumber({
 			errorHandler: onError
@@ -63,6 +59,23 @@ gulp.task('browserify', function() {
 		.bundle()
 		.pipe(vinylSource('bundle.js'))
 		.pipe(gulp.dest('./www/dist'));
+});
+
+gulp.task('test', function() {
+	return gulp.src('./dummy.js')
+		.pipe(karma({
+			configFile: 'karma.conf.js',
+			action: 'run'
+		}))
+		.on('error', function(err) {
+			console.log(err);
+			this.emit('end');
+		})
+});
+
+gulp.task('watch', function() {
+	gulp.watch(paths.sass, ['sass']);
+	gulp.watch(paths.js, ['lint', 'browserify']);
 });
 
 gulp.task('default', ['sass', 'lint', 'browserify', 'watch']);
