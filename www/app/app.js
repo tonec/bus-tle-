@@ -8,9 +8,9 @@ angular.module('moreModule', []);
 require('../common/factories/globalsFactory');
 require('../common/factories/geoFactory');
 require('../common/factories/busstopsFactory');
-require('./map/controllers');
-require('./map/directives');
-require('./more/controllers');
+require('./map/mapController');
+require('./map/mapDirective');
+require('./more/moreControllers');
 
 angular.module('bustleApp', [
 	'ionic',
