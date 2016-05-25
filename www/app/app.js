@@ -10,7 +10,7 @@ require('../common/factories/geoFactory');
 require('../common/factories/busstopsFactory');
 require('./map/mapController');
 require('./map/mapDirective');
-require('./more/moreControllers');
+require('./more/moreController');
 
 angular.module('bustleApp', [
 	'ionic',
