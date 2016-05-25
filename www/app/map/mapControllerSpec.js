@@ -1,26 +1,48 @@
 describe('mapController', function() {
 
-	// beforeEach(function() {
-	// 	angular.mock.module('mapModule');
-	// });
+	beforeEach(angular.mock.module('mapModule'));
 
-	// beforeEach(inject(function(_$rootScope_, _$controller_) {
-	// 	$rootScope = _$rootScope_;
-	// 	$scope = $rootScope.$new();
-	// 	$controller = _$controller_;
-	// 	geoFactory = {};
-	// 	busstopsFactory = {};
+	beforeEach(function() {
+		angular.mock.module(function($provide) {
+			$provide.factory('globalsFactory', function() {
+				return {
 
-	// 	$controller('MapController', {
-	// 		'$rootScope': $rootScope,
-	// 		'$scope': $scope,
-	// 		'geoFactory': geoFactory,
-	// 		'busstopsFactory': busstopsFactory
-	// 	});
-	// }));
+				}
+			});
+		});
+		angular.mock.module(function($provide) {
+			$provide.factory('geoFactory', ['$q', '$window', function($q, $window) {
+				return {
 
-	// it('should be defined.', function() {
-	// 	expect($controller).toBeDefined();
-	// });
+				}
+			}]);
+		});
+		angular.mock.module(function($provide) {
+			$provide.factory('busstopsFactory', ['$http', '$httpParamSerializer', 'globalsFactory', function($http, $httpParamSerializer, globalsFactory) {
+				return {
+
+				}
+			}]);
+		});
+	});
+
+	beforeEach(inject(function(_$rootScope_, _$controller_, _geoFactory_, _busstopsFactory_) {
+		$rootScope = _$rootScope_;
+		$scope = $rootScope.$new();
+		$controller = _$controller_;
+		geoFactory = _geoFactory_;
+		busstopsFactory = _busstopsFactory_;
+
+		$controller('MapController', {
+			'$rootScope': $rootScope,
+			'$scope': $scope,
+			'geoFactory': geoFactory,
+			'busstopsFactory': busstopsFactory
+		});
+	}));
+
+	it('should be defined.', function($controller) {
+		expect($controller).toBeDefined();
+	});
 
 });
