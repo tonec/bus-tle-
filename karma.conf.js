@@ -20,7 +20,7 @@ module.exports = function(config) {
 	  './www/lib/underscore/underscore-min.js',
 	  './node_modules/angular-mocks/angular-mocks.js',
 	  './www/app/**/*.js',
-	  './test/*Spec.js'
+	  './test/**/*Spec.js'
 	],
 
 
