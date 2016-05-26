@@ -1,48 +1,44 @@
 describe('mapController', function() {
+	var $q;
+	var $scope;
+	var deferred;
 
 	beforeEach(angular.mock.module('mapModule'));
 
-	beforeEach(function() {
-		angular.mock.module(function($provide) {
-			$provide.factory('globalsFactory', function() {
-				return {
-
-				}
-			});
-		});
-		angular.mock.module(function($provide) {
-			$provide.factory('geoFactory', ['$q', '$window', function($q, $window) {
-				return {
-
-				}
-			}]);
-		});
-		angular.mock.module(function($provide) {
-			$provide.factory('busstopsFactory', ['$http', '$httpParamSerializer', 'globalsFactory', function($http, $httpParamSerializer, globalsFactory) {
-				return {
-
-				}
-			}]);
-		});
-	});
-
-	beforeEach(inject(function(_$rootScope_, _$controller_, _geoFactory_, _busstopsFactory_) {
+	beforeEach(inject(function(_$q_, _$rootScope_) {
+		$q = _$q_;
 		$rootScope = _$rootScope_;
-		$scope = $rootScope.$new();
-		$controller = _$controller_;
-		geoFactory = _geoFactory_;
-		busstopsFactory = _busstopsFactory_;
-
-		$controller('MapController', {
-			'$rootScope': $rootScope,
-			'$scope': $scope,
-			'geoFactory': geoFactory,
-			'busstopsFactory': busstopsFactory
-		});
+		deferred = $q.defer();
 	}));
 
-	it('should be defined.', function() {
-		expect($controller).toBeDefined();
+
+	it('should resolve promise.', function() {
+		var response;
+
+		deferred.promise.then(function(data) {
+			response = data;
+		});
+
+		deferred.resolve('Returned OK!');
+		$rootScope.$apply();
+		expect(response).toBe('Returned OK!');
+	});
+
+
+	it('should reject promise', function() {
+		var response;
+
+		deferred.promise.then(function(data) {
+			response = data;
+		});
+
+		deferred.promise.catch(function(data) {
+			response = 'Error: ' + data;
+		});
+
+		deferred.reject('500 Status');
+		$rootScope.$apply();
+		expect(response).toBe('Error: 500 Status');
 	});
 
 });

@@ -1,7 +1,16 @@
 module.exports = angular.module('mapModule')
 
-.controller('MapController', function($scope, geoFactory, busstopsFactory) {
+.controller('MapController', function($scope, geoFactory) {
 	'ngInject';
+
+	geoFactory.getCurrentPosition()
+		.then(function(position) {
+			$scope.position = position;
+			console.log($scope.position);
+		})
+		.catch(function() {
+			$scope.error = 'There has been an error.';
+		});
 
 	$scope.refresh = function() {
 		geoFactory.getCurrentPosition().then(function(position) {
@@ -42,6 +51,6 @@ module.exports = angular.module('mapModule')
 		});
 	};
 
-	$scope.refresh();
+	// $scope.refresh();
 
 });
