@@ -1,6 +1,7 @@
 module.exports = angular.module('mapModule')
 
 .controller('MapController', function($scope, geoFactory, busstopsFactory) {
+	'ngInject';
 
 	$scope.refresh = function() {
 		geoFactory.getCurrentPosition().then(function(position) {

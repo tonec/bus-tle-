@@ -41,7 +41,7 @@ describe('mapController', function() {
 		});
 	}));
 
-	it('should be defined.', function($controller) {
+	it('should be defined.', function() {
 		expect($controller).toBeDefined();
 	});
 

@@ -1,6 +1,7 @@
 module.exports = angular.module('factories')
 
-.factory('busstopsFactory', ['$http', '$httpParamSerializer', 'globalsFactory', function($http, $httpParamSerializer, globalsFactory) {
+.factory('busstopsFactory', function($http, $httpParamSerializer, globalsFactory) {
+	'ngInject';
 
 	var generateQueryObj = function(coords) {
 		return {
@@ -19,4 +20,4 @@ module.exports = angular.module('factories')
 			});
 		}
 	};
-}]);
+});
