@@ -1,9 +1,14 @@
 describe('geoFactory', function() {
+	var geoFactory;
 
 	beforeEach(angular.mock.module('factories'));
 
-	it('should be defined.', inject(function(geoFactory) {
-		expect(geoFactory).toBeDefined();
+	beforeEach(inject(function(_geoFactory_) {
+		geoFactory = _geoFactory_;
 	}));
+
+	it('should be defined.', function() {
+		expect(geoFactory).toBeDefined();
+	});
 
 });
