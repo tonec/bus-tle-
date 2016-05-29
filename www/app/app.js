@@ -7,7 +7,7 @@ angular.module('moreModule', []);
 
 require('../common/factories/globalsFactory');
 require('../common/services/geoService');
-require('../common/factories/busstopsFactory');
+require('../common/services/busStopsService');
 require('./map/mapController');
 require('./map/mapDirective');
 require('./more/moreController');
