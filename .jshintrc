@@ -1,14 +1,22 @@
 {
 	"node": true,
 	"browser": true,
+	"jasmine": true,
 	"predef": [
-        "cordova",
-        "ionic",
-        "angular",
-        "alert",
-        "$",
-        "locache",
-        "response",
-        "StatusBar"
-    ]
+		"cordova",
+		"ionic",
+		"angular",
+		"alert",
+		"$",
+		"locache",
+		"response",
+		"StatusBar",
+		"describe",
+		"it",
+		"expect",
+		"beforeEach",
+		"afterEach",
+		"module",
+		"inject"
+	]
 }
