@@ -78,4 +78,4 @@ gulp.task('watch', function() {
 	gulp.watch(paths.js, ['lint', 'browserify', 'test']);
 });
 
-gulp.task('default', ['sass', 'lint', 'browserify', 'watch']);
+gulp.task('default', ['sass', 'lint', 'browserify', 'test', 'watch']);
