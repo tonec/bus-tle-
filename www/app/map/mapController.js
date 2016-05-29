@@ -1,60 +1,72 @@
 module.exports = angular.module('mapModule')
 
-.controller('MapController', function($scope, geoFactory) {
+.controller('MapController', function($scope, geoFactory, busstopsFactory) {
 	'ngInject';
 
-	$scope.getPosition = function() {
+	$scope.position = {};
+	$scope.busStops = {};
+	$scope.error = '';
+
+	this.init = function() {
+		$scope.getPosition = this.getPosition;
+		$scope.getBusStopsNearby = this.getBusStopsNearby;
+		$scope.buildMap = this.buildMap;
+
+		this.getPosition();
+	};
+
+	this.getPosition = function() {
 		geoFactory.getCurrentPosition()
 			.then(function(position) {
 				$scope.position = position;
+				$scope.getBusStopsNearby();
 			})
 			.catch(function() {
 				$scope.error = 'There has been an error.';
 			});
 	};
 
-	$scope.getPosition();
+	this.getBusStopsNearby = function() {
+		var coords = $scope.position.coords;
 
+		busstopsFactory.getLocal(coords)
+			.then(function(response) {
+				$scope.busStops = response;
+				$scope.buildMap();
+			})
+			.catch(function() {
+				$scope.error = 'There has been an error.';
+			});
+	};
 
-	// $scope.refresh = function() {
-	// 	geoFactory.getCurrentPosition().then(function(position) {
-	// 		var coords = position.coords;
+	this.buildMap = function() {
+		var data = $scope.busStops.data;
+		var markers = [];
 
-	// 		var mapOptions = {
-	// 			center: new google.maps.LatLng(coords.latitude, coords.longitude),
-	// 			zoom: 10,
-	// 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-	// 			scrollwheel: false
-	// 		};
+		var mapOptions = {
+			center: new google.maps.LatLng(data.latitude, data.longitude),
+			zoom: 10,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scrollwheel: false
+		};
 
-	// 		$scope.mapOptions = mapOptions;
+		$scope.mapOptions = mapOptions;
 
-	// 		busstopsFactory.getLocal(coords).then(function(response) {
-	// 			console.log('Success', response);
+		angular.forEach(data.stops, function(stop) {
 
-	// 			var markers = [];
+			var LatLng = new google.maps.LatLng(stop.latitude, stop.longitude);
 
-	// 			angular.forEach(response.data.stops, function(stop) {
+			var marker = {
+				id: stop.atcocode,
+				position: LatLng,
+				title: stop.name
+			};
 
-	// 				var position = new google.maps.LatLng(stop.latitude, stop.longitude);
+			markers.push(marker);
+		});
 
-	// 				var marker = {
-	// 					id: stop.atcocode,
-	// 					position: position,
-	// 					title: stop.name
-	// 				};
+		$scope.markers = markers;
+	};
 
-	// 				markers.push(marker);
-	// 			});
-
-	// 			$scope.markers = markers;
-
-	// 		}, function(error) {
-	// 			console.log('Error: ', error);
-	// 		});
-	// 	});
-	// };
-
-	// $scope.refresh();
-
+	this.init();
 });

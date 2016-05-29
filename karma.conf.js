@@ -15,6 +15,7 @@ module.exports = function(config) {
 
 	// list of files / patterns to load in the browser
 	files: [
+		'http://maps.googleapis.com/maps/api/js?key=AIzaSyCew1S5EW8N24hcfM2U2o0d2lHSLKUj4Q4',
 		'./www/lib/ionic/js/ionic.bundle.js',
 		'./www/lib/underscore/underscore-min.js',
 		'./www/lib/underscore/underscore-min.js',
