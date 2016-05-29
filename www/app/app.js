@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('services', []);
 angular.module('factories', []);
+angular.module('services', []);
 angular.module('mapModule', []);
 angular.module('moreModule', []);
 
 require('../common/factories/globalsFactory');
-require('../common/factories/geoFactory');
+require('../common/services/geoService');
 require('../common/factories/busstopsFactory');
 require('./map/mapController');
 require('./map/mapDirective');

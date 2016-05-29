@@ -1,6 +1,6 @@
 module.exports = angular.module('mapModule')
 
-.controller('MapController', function($scope, geoFactory, busstopsFactory) {
+.controller('MapController', function($scope, geoService, busstopsFactory) {
 	'ngInject';
 
 	$scope.position = {};
@@ -16,7 +16,7 @@ module.exports = angular.module('mapModule')
 	};
 
 	this.getPosition = function() {
-		geoFactory.getCurrentPosition()
+		geoService.getCurrentPosition()
 			.then(function(position) {
 				$scope.position = position;
 				$scope.getBusStopsNearby();

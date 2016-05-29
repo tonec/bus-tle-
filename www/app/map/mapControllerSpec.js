@@ -1,7 +1,7 @@
 describe('mapController', function() {
 	var mapController;
 	var scope;
-	var geoFactory;
+	var geoService;
 	var busstopsFactory;
 	var passPromise;
 
@@ -9,7 +9,7 @@ describe('mapController', function() {
 
 	beforeEach(function() {
 		angular.mock.module(function($provide) {
-			$provide.factory('geoFactory', ['$q', function($q){
+			$provide.factory('geoService', ['$q', function($q){
 				function getCurrentPosition() {
 					var position = {
 						coords: {
@@ -90,17 +90,17 @@ describe('mapController', function() {
 		});
 	});
 
-	beforeEach(inject(function($rootScope, $controller, geoFactory, busstopsFactory) {
+	beforeEach(inject(function($rootScope, $controller, geoService, busstopsFactory) {
 		scope = $rootScope.$new();
-		mockGeoFactory = geoFactory;
+		mockGeoService = geoService;
 		mockBusstopsFactory = busstopsFactory;
 
-		spyOn(mockGeoFactory, 'getCurrentPosition').and.callThrough();
+		spyOn(mockGeoService, 'getCurrentPosition').and.callThrough();
 		spyOn(mockBusstopsFactory, 'getLocal').and.callThrough();
 
 		mapController = $controller('MapController', {
 			$scope: scope,
-			geoFactory: mockGeoFactory,
+			geoService: mockGeoService,
 			busstopsFactory: mockBusstopsFactory
 		});
 	}));
