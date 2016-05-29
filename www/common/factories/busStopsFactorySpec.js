@@ -1,9 +1,14 @@
 describe('busstopsFactory', function() {
+	var busstopsFactory;
 
 	beforeEach(angular.mock.module('factories'));
 
-	it('should be defined.', inject(function(busstopsFactory) {
-		expect(busstopsFactory).toBeDefined();
+	beforeEach(inject(function(_busstopsFactory_) {
+		busstopsFactory = _busstopsFactory_;
 	}));
+
+	it('should be defined.', function() {
+		expect(busstopsFactory).toBeDefined();
+	});
 
 });
