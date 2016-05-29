@@ -1,23 +1,20 @@
 module.exports = angular.module('mapModule')
 
-.controller('MapController', function($scope) {
+.controller('MapController', function($scope, geoFactory) {
 	'ngInject';
 
+	$scope.getPosition = function() {
+		geoFactory.getCurrentPosition()
+			.then(function(position) {
+				$scope.position = position;
+			})
+			.catch(function() {
+				$scope.error = 'There has been an error.';
+			});
+	};
 
+	$scope.getPosition();
 
-	$scope.location = 'here i am';
-
-
-	// {coords: Coordinates, timestamp: 1464474395438 }
-
-	// geoFactory.getCurrentPosition()
-	// 	.then(function(position) {
-	// 		$scope.position = position;
-	// 		console.log($scope.position);
-	// 	})
-	// 	.catch(function() {
-	// 		$scope.error = 'There has been an error.';
-	// 	});
 
 	// $scope.refresh = function() {
 	// 	geoFactory.getCurrentPosition().then(function(position) {
