@@ -1,4 +1,4 @@
-module.exports = angular.module('moreModule')
+module.exports = angular.module('bustleApp.moreModule')
 	.controller('MoreController', MoreController);
 
 /* ngInject */

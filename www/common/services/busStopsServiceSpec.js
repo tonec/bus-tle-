@@ -1,8 +1,7 @@
 describe('busStopsService', function() {
 	var busStopsService;
 
-    beforeEach(angular.mock.module('factories'));
-	beforeEach(angular.mock.module('services'));
+	beforeEach(angular.mock.module('bustleApp.services'));
 
 	beforeEach(inject(function(_busStopsService_) {
 		busStopsService = _busStopsService_;

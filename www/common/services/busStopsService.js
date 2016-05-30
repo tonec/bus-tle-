@@ -1,4 +1,4 @@
-module.exports = angular.module('services')
+module.exports = angular.module('bustleApp.services')
 	.service('busStopsService', busStopsService);
 
 /* ngInject */

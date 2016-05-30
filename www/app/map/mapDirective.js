@@ -1,4 +1,4 @@
-module.exports = angular.module('mapModule')
+module.exports = angular.module('bustleApp.mapModule')
 	.directive('uiMap', uiMap);
 
 /* ngInject */

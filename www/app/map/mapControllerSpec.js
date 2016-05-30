@@ -5,7 +5,7 @@ describe('mapController', function() {
 	var busStopsService;
 	var passPromise;
 
-	beforeEach(angular.mock.module('mapModule'));
+	beforeEach(angular.mock.module('bustleApp.mapModule'));
 
 	beforeEach(function() {
 		angular.mock.module(function($provide) {

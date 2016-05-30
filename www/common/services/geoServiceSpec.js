@@ -1,7 +1,7 @@
 describe('geoService', function() {
 	var geoService;
 
-	beforeEach(angular.mock.module('services'));
+	beforeEach(angular.mock.module('bustleApp.services'));
 
 	beforeEach(inject(function(_geoService_) {
 		geoService = _geoService_;

@@ -1,4 +1,4 @@
-module.exports = angular.module('factories')
+module.exports = angular.module('bustleApp.services')
 	.factory('globalsFactory', globalsFactory);
 
 function globalsFactory() {
