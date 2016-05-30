@@ -4,12 +4,12 @@
 		<ion-header-bar align-title="center" class="bar-stable">
 			<h1 class="title">Bus[tle]</h1>
 			<div class="buttons">
-				<button ng-click="mapVm.refresh()"><i class="icon ion-refresh"></i></button>
+				<button ng-click="mapVm.getPosition()"><i class="icon ion-refresh"></i></button>
 			</div>
 		</ion-header-bar>
 
-		<div class="map-wrap" ng-if="mapOptions && markers">
-			<ui-map options="mapOptions" markers="markers"></ui-map>
+		<div class="map-wrap" ng-if="mapVm.mapOptions && mapVm.markers">
+			<ui-map options="mapVm.mapOptions" markers="mapVm.markers"></ui-map>
 		</div>
 
 	</ion-content>

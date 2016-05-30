@@ -2,47 +2,43 @@ module.exports = angular.module('mapModule')
 	.controller('MapController', MapController);
 
 /* ngInject */
-function MapController($scope, geoService, busStopsService) {
-	'ngInject';
+function MapController(geoService, busStopsService) {
+	var mapVm = this;
 
-	$scope.position = {};
-	$scope.busStops = {};
-	$scope.error = '';
+	this.position = {};
+	this.busStops = {};
+	this.error = '';
 
 	this.init = function() {
-		$scope.getPosition = this.getPosition;
-		$scope.getBusStopsNearby = this.getBusStopsNearby;
-		$scope.buildMap = this.buildMap;
-
-		this.getPosition();
+		mapVm.getPosition();
 	};
 
 	this.getPosition = function() {
 		geoService.getCurrentPosition()
 			.then(function(position) {
-				$scope.position = position;
-				$scope.getBusStopsNearby();
+				mapVm.position = position;
+				mapVm.getBusStopsNearby();
 			})
 			.catch(function() {
-				$scope.error = 'There has been an error.';
+				mapVm.error = 'There has been an error.';
 			});
 	};
 
 	this.getBusStopsNearby = function() {
-		var coords = $scope.position.coords;
+		var coords = mapVm.position.coords;
 
 		busStopsService.getLocal(coords)
 			.then(function(response) {
-				$scope.busStops = response;
-				$scope.buildMap();
+				mapVm.busStops = response;
+				mapVm.buildMap();
 			})
 			.catch(function() {
-				$scope.error = 'There has been an error.';
+				mapVm.error = 'There has been an error.';
 			});
 	};
 
 	this.buildMap = function() {
-		var data = $scope.busStops.data;
+		var data = mapVm.busStops.data;
 		var markers = [];
 
 		var mapOptions = {
@@ -52,7 +48,7 @@ function MapController($scope, geoService, busStopsService) {
 			scrollwheel: false
 		};
 
-		$scope.mapOptions = mapOptions;
+		mapVm.mapOptions = mapOptions;
 
 		angular.forEach(data.stops, function(stop) {
 
@@ -67,7 +63,7 @@ function MapController($scope, geoService, busStopsService) {
 			markers.push(marker);
 		});
 
-		$scope.markers = markers;
+		mapVm.markers = markers;
 	};
 
 	this.init();

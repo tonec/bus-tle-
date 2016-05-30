@@ -98,7 +98,7 @@ describe('mapController', function() {
 		spyOn(mockGeoService, 'getCurrentPosition').and.callThrough();
 		spyOn(mockBusStopsService, 'getLocal').and.callThrough();
 
-		mapController = $controller('MapController', {
+		mapController = $controller('MapController as mapVm', {
 			$scope: scope,
 			geoService: mockGeoService,
 			busStopsService: mockBusStopsService
@@ -106,43 +106,43 @@ describe('mapController', function() {
 	}));
 
 	it('should have a method to get the current position', function() {
-		expect(mapController.getPosition).toBeDefined();
+		expect(scope.mapVm.getPosition).toBeDefined();
 	});
 
 	it('should get and set the position property on scope', function() {
 		passPromise = true;
-		scope.getPosition();
+		scope.mapVm.getPosition();
 		scope.$digest();
 
-		expect(scope.position).toBeDefined();
+		expect(scope.mapVm.position).toBeDefined();
 	});
 
 	it('should set the coords property on scope.position', function() {
 		passPromise = true;
-		scope.getPosition();
+		scope.mapVm.getPosition();
 		scope.$digest();
 
-		expect(scope.position.coords).toBeDefined();
-		expect(scope.position.coords.latitude).toBe(51.5412621);
+		expect(scope.mapVm.position.coords).toBeDefined();
+		expect(scope.mapVm.position.coords.latitude).toBe(51.5412621);
 	});
 
 	it('should populate an error property on error', function() {
 		passPromise = false;
-		scope.getPosition();
+		scope.mapVm.getPosition();
 		scope.$digest();
 
-		expect(scope.error).toBe('There has been an error.');
+		expect(scope.mapVm.error).toBe('There has been an error.');
 	});
 
 	it('should have a method to get bus stops nearby', function() {
-		expect(mapController.getBusStopsNearby).toBeDefined();
+		expect(scope.mapVm.getBusStopsNearby).toBeDefined();
 	});
 
 	it('should have a buildMap method', function() {
-		expect(mapController.buildMap).toBeDefined();
+		expect(scope.mapVm.buildMap).toBeDefined();
 	});
 
 	it('should give access to getPosition on the scope', function() {
-		expect(scope.getPosition).toBeDefined();
+		expect(scope.mapVm.getPosition).toBeDefined();
 	});
 });
