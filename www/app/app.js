@@ -9,10 +9,10 @@ require('../common/services/globalsFactory');
 require('../common/services/geoService');
 require('../common/services/busStopsService');
 require('../common/services/dataService');
-require('./map/mapController');
-require('./map/mapDirective');
-require('./list/listController');
-require('./more/moreController');
+require('../common/directives/mapDirective');
+require('../app/map/mapController');
+require('../app/list/listController');
+require('../app/more/moreController');
 
 angular.module('bustleApp', [
 	'ionic',
