@@ -1,8 +1,8 @@
 module.exports = angular.module('services')
+	.service('geoService', geoService);
 
-.service('geoService', function($q, $window, $rootScope) {
-	'ngInject';
-
+/* ngInject */
+function geoService($q, $window, $rootScope) {
 	this.getCurrentPosition = function() {
 		var deferred = $q.defer();
 
@@ -18,5 +18,4 @@ module.exports = angular.module('services')
 
 		return deferred.promise;
 	};
-
-});
+}

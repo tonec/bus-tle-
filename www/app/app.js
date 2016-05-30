@@ -56,7 +56,8 @@ angular.module('bustleApp', [
 		views: {
 			'tab-map': {
 				templateUrl: 'app/map/views/index.html',
-				controller: 'MapController'
+				controller: 'MapController',
+				controllerAs: 'mapVm'
 			}
 		}
 	})
@@ -66,7 +67,8 @@ angular.module('bustleApp', [
 		views: {
 			'tab-more': {
 				templateUrl: 'app/more/views/index.html',
-				controller: 'MoreController'
+				controller: 'MoreController',
+				controllerAs: 'moreVm'
 			}
 		}
 	});

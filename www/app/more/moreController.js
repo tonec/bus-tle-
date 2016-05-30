@@ -1,3 +1,5 @@
 module.exports = angular.module('moreModule')
+	.controller('MoreController', MoreController);
 
-.controller('MoreController', function($scope) {});
+/* ngInject */
+function MoreController($scope) {}

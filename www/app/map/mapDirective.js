@@ -1,7 +1,8 @@
 module.exports = angular.module('mapModule')
+	.directive('uiMap', uiMap);
 
-.directive('uiMap', function() {
-
+/* ngInject */
+function uiMap() {
 	return {
 		restrict: 'E',
 		template: '<div id="gmaps" class="map"></div>',
@@ -62,4 +63,4 @@ module.exports = angular.module('mapModule')
 			});
 		}
 	};
-});
+}

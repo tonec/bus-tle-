@@ -10,5 +10,4 @@ describe('geoService', function() {
 	it('should be defined.', function() {
 		expect(geoService).toBeDefined();
 	});
-
 });

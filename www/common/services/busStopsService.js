@@ -1,8 +1,8 @@
 module.exports = angular.module('services')
+	.service('busStopsService', busStopsService);
 
-.service('busStopsService', function($http, $httpParamSerializer, globalsFactory) {
-	'ngInject';
-
+/* ngInject */
+function busStopsService($http, $httpParamSerializer, globalsFactory) {
 	var generateQueryObj = function(coords) {
 		return {
 			lat: coords.latitude,
@@ -18,5 +18,4 @@ module.exports = angular.module('services')
 			url: globalsFactory.api_url_near + '?' + $httpParamSerializer(generateQueryObj(coords))
 		});
 	};
-
-});
+}

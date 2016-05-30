@@ -1,6 +1,8 @@
 module.exports = angular.module('mapModule')
+	.controller('MapController', MapController);
 
-.controller('MapController', function($scope, geoService, busStopsService) {
+/* ngInject */
+function MapController($scope, geoService, busStopsService) {
 	'ngInject';
 
 	$scope.position = {};
@@ -69,4 +71,4 @@ module.exports = angular.module('mapModule')
 	};
 
 	this.init();
-});
+}
