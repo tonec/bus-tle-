@@ -1,0 +1,21 @@
+<ion-view view-title="List">
+
+	<ion-header-bar align-title="center" class="bar-stable">
+		<h1 class="title">Bus[tle]</h1>
+		<div class="buttons">
+			<button ng-click="listVm.getPosition()"><i class="icon ion-refresh"></i></button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content>
+
+		<ion-list>
+			<ion-item ng-repeat="item in listVm.busStops">
+				{{item.name}}
+			</ion-item>
+		</ion-list>
+
+	</ion-content>
+
+</ion-view>
+

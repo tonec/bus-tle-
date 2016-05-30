@@ -2,6 +2,7 @@
 
 angular.module('bustleApp.services', []);
 angular.module('bustleApp.mapModule', []);
+angular.module('bustleApp.listModule', []);
 angular.module('bustleApp.moreModule', []);
 
 require('../common/services/globalsFactory');
@@ -9,12 +10,14 @@ require('../common/services/geoService');
 require('../common/services/busStopsService');
 require('./map/mapController');
 require('./map/mapDirective');
+require('./list/listController');
 require('./more/moreController');
 
 angular.module('bustleApp', [
 	'ionic',
 	'bustleApp.services',
 	'bustleApp.mapModule',
+	'bustleApp.listModule',
 	'bustleApp.moreModule'
 ])
 
@@ -56,6 +59,17 @@ angular.module('bustleApp', [
 				templateUrl: 'app/map/views/index.html',
 				controller: 'MapController',
 				controllerAs: 'mapVm'
+			}
+		}
+	})
+
+	.state('tab.list', {
+		url: '/list',
+		views: {
+			'tab-list': {
+				templateUrl: 'app/list/views/index.html',
+				controller: 'ListController',
+				controllerAs: 'listVm'
 			}
 		}
 	})
