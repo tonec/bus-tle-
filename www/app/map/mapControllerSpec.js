@@ -60,7 +60,7 @@ describe('mapController', function() {
 								"longitude":-0.08954,
 								"latitude":51.5402,
 								"distance":153
-								}, {
+							}, {
 								"atcocode":"490018480NW",
 								"smscode":"",
 								"name":"Halliford Street / Oxford Arms",
@@ -90,18 +90,17 @@ describe('mapController', function() {
 		});
 	});
 
-	beforeEach(inject(function($rootScope, $controller, geoService, busStopsService) {
-		scope = $rootScope.$new();
-		mockGeoService = geoService;
-		mockBusStopsService = busStopsService;
+	beforeEach(inject(function(_$rootScope_, _$controller_, _geoService_, _busStopsService_) {
+		scope = _$rootScope_.$new();
+		$controller = _$controller_;
 
-		spyOn(mockGeoService, 'getCurrentPosition').and.callThrough();
-		spyOn(mockBusStopsService, 'getLocal').and.callThrough();
+		spyOn(_geoService_, 'getCurrentPosition').and.callThrough();
+		spyOn(_busStopsService_, 'getLocal').and.callThrough();
 
 		mapController = $controller('MapController as mapVm', {
 			$scope: scope,
-			geoService: mockGeoService,
-			busStopsService: mockBusStopsService
+			geoService: _geoService_,
+			busStopsService: _busStopsService_
 		});
 	}));
 
