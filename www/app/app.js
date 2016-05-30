@@ -8,6 +8,7 @@ angular.module('bustleApp.moreModule', []);
 require('../common/services/globalsFactory');
 require('../common/services/geoService');
 require('../common/services/busStopsService');
+require('../common/services/dataService');
 require('./map/mapController');
 require('./map/mapDirective');
 require('./list/listController');

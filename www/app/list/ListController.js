@@ -1,15 +1,21 @@
 module.exports = angular.module('bustleApp.listModule')
 	.controller('ListController', ListController);
 
-function ListController(geoService, busStopsService) {
+function ListController(geoService, busStopsService, dataService) {
 	var listVm = this;
 
-	this.position = {};
-	this.busStops = {};
-	this.error = '';
+	this.position = null;
+	this.busStopsData = null;
+	this.stops = null;
+	this.error = null;
 
 	this.init = function() {
-		listVm.getPosition();
+		if (dataService.busStopsData) {
+			listVm.busStopsData = dataService.busStopsData;
+			listVm.stops = listVm.busStopsData.data.stops;
+		} else {
+			listVm.getPosition();
+		}
 	};
 
 	this.getPosition = function() {
@@ -28,8 +34,8 @@ function ListController(geoService, busStopsService) {
 
 		busStopsService.getLocal(coords)
 			.then(function(response) {
-				listVm.busStops = response.data.stops;
-				console.log(listVm.busStops);
+				listVm.busStopsData = dataService.busStopsData = response;
+				listVm.stops = response.data.stops;
 			})
 			.catch(function(error) {
 				listVm.error = error;

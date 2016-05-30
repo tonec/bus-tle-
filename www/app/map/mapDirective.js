@@ -56,7 +56,6 @@ function uiMap() {
 			}
 
 			scope.$watch(attr.markers, function() {
-				console.log('changed');
 				setMarkers();
 				map.fitBounds(bounds);
 				map.panToBounds(bounds);

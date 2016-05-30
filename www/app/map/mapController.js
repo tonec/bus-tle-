@@ -2,15 +2,22 @@ module.exports = angular.module('bustleApp.mapModule')
 	.controller('MapController', MapController);
 
 /* ngInject */
-function MapController(geoService, busStopsService) {
+function MapController(geoService, busStopsService, dataService) {
 	var mapVm = this;
 
-	this.position = {};
-	this.busStops = {};
-	this.error = '';
+	this.position = null;
+	this.busStopsData = null;
+	this.stops = null;
+	this.error = null;
 
 	this.init = function() {
-		mapVm.getPosition();
+		if (dataService.busStopsData) {
+			mapVm.busStopsData = dataService.busStopsData;
+			mapVm.stops = mapVm.busStopsData.data.stops;
+			mapVm.buildMap();
+		} else {
+			mapVm.getPosition();
+		}
 	};
 
 	this.getPosition = function() {
@@ -29,7 +36,7 @@ function MapController(geoService, busStopsService) {
 
 		busStopsService.getLocal(coords)
 			.then(function(response) {
-				mapVm.busStops = response;
+				mapVm.busStopsData = dataService.busStopsData = response;
 				mapVm.buildMap();
 			})
 			.catch(function(error) {
@@ -38,7 +45,7 @@ function MapController(geoService, busStopsService) {
 	};
 
 	this.buildMap = function() {
-		var data = mapVm.busStops.data;
+		var data = mapVm.busStopsData.data;
 		var markers = [];
 
 		var mapOptions = {
@@ -51,9 +58,7 @@ function MapController(geoService, busStopsService) {
 		mapVm.mapOptions = mapOptions;
 
 		angular.forEach(data.stops, function(stop) {
-
 			var LatLng = new google.maps.LatLng(stop.latitude, stop.longitude);
-
 			var marker = {
 				id: stop.atcocode,
 				position: LatLng,

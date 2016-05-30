@@ -21,14 +21,14 @@ function busStopsService($http, $httpParamSerializer, globalsFactory) {
 			url: globalsFactory.api_url_near + '?' + $httpParamSerializer(generateQueryObj(coords))
 		});
 
-		data.then(function(data) {
+		return data.then(function(data) {
 			busStopData = data;
+			return data;
 		});
-
-		return data;
 	}
 
 	return {
+		busStopData: busStopData,
 		getLocal: getLocal
 	};
 
