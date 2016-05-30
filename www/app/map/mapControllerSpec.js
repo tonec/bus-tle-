@@ -9,6 +9,14 @@ describe('mapController', function() {
 
 	beforeEach(function() {
 		angular.mock.module(function($provide) {
+
+			$provide.service('dataService', function(){
+				return {
+					busStopsData: null,
+					stops: null
+				};
+			});
+
 			$provide.factory('geoService', ['$q', function($q){
 				function getCurrentPosition() {
 					var position = {
