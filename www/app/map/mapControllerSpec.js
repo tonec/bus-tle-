@@ -9,7 +9,7 @@ describe('mapController', function() {
 
 	beforeEach(function() {
 		angular.mock.module(function($provide) {
-			$provide.service('geoService', ['$q', function($q){
+			$provide.factory('geoService', ['$q', function($q){
 				function getCurrentPosition() {
 					var position = {
 						coords: {
@@ -130,7 +130,7 @@ describe('mapController', function() {
 		scope.mapVm.getPosition();
 		scope.$digest();
 
-		expect(scope.mapVm.error).toBe('There has been an error.');
+		expect(scope.mapVm.error).toBe('Error');
 	});
 
 	it('should have a method to get bus stops nearby', function() {

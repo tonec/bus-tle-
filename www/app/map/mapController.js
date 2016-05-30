@@ -19,8 +19,8 @@ function MapController(geoService, busStopsService) {
 				mapVm.position = position;
 				mapVm.getBusStopsNearby();
 			})
-			.catch(function() {
-				mapVm.error = 'There has been an error.';
+			.catch(function(error) {
+				mapVm.error = error;
 			});
 	};
 
@@ -32,8 +32,8 @@ function MapController(geoService, busStopsService) {
 				mapVm.busStops = response;
 				mapVm.buildMap();
 			})
-			.catch(function() {
-				mapVm.error = 'There has been an error.';
+			.catch(function(error) {
+				mapVm.error = error;
 			});
 	};
 
