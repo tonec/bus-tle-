@@ -6,7 +6,7 @@ function geoService($q, $window, $rootScope) {
 
 	var position = null;
 
-	var getCurrentPosition = function() {
+	function getCurrentPosition() {
 		var deferred = $q.defer();
 
 		$window.navigator.geolocation.getCurrentPosition(function(data) {
@@ -20,7 +20,7 @@ function geoService($q, $window, $rootScope) {
 		});
 
 		return deferred.promise;
-	};
+	}
 
 	return {
 		position: position,
