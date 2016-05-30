@@ -5,11 +5,11 @@ angular.module('bustleApp.mapModule', []);
 angular.module('bustleApp.listModule', []);
 angular.module('bustleApp.moreModule', []);
 
-require('../common/services/globalsFactory');
-require('../common/services/geoService');
-require('../common/services/busStopsService');
-require('../common/services/dataService');
-require('../common/directives/mapDirective');
+require('../app/shared/services/globalsFactory');
+require('../app/shared/services/geoService');
+require('../app/shared/services/busStopsService');
+require('../app/shared/services/dataService');
+require('../app/shared/directives/mapDirective');
 require('../app/map/mapController');
 require('../app/list/listController');
 require('../app/more/moreController');
