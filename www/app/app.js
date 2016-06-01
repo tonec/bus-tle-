@@ -5,7 +5,7 @@ angular.module('bustleApp.mapModule', []);
 angular.module('bustleApp.listModule', []);
 angular.module('bustleApp.moreModule', []);
 
-require('../app/shared/services/globalsFactory');
+require('../app/shared/services/globals');
 require('../app/shared/services/geoService');
 require('../app/shared/services/busStopsService');
 require('../app/shared/services/dataService');

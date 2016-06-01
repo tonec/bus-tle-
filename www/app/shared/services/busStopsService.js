@@ -2,7 +2,7 @@ module.exports = angular.module('bustleApp.services')
 	.factory('busStopsService', busStopsService);
 
 /* ngInject */
-function busStopsService($http, $httpParamSerializer, globalsFactory) {
+function busStopsService($http, $httpParamSerializer, globals) {
 
 	var busStopData = null;
 
@@ -10,15 +10,19 @@ function busStopsService($http, $httpParamSerializer, globalsFactory) {
 		return {
 			lat: coords.latitude,
 			lon: coords.longitude,
-			app_key: globalsFactory.app_key,
-			app_id: globalsFactory.app_id
+			app_key: globals.app_key,
+			app_id: globals.app_id
 		};
 	}
 
 	function getLocal(coords) {
+
+		console.log(globals);
+		var url = globals.api_url + globals.api_bus.near;
+
 		var data = $http({
 			method: 'GET',
-			url: globalsFactory.api_url_near + '?' + $httpParamSerializer(generateQueryObj(coords))
+			url: url + '?' + $httpParamSerializer(generateQueryObj(coords))
 		});
 
 		return data.then(function(data) {
