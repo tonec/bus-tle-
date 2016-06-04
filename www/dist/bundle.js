@@ -23,7 +23,7 @@ angular.module('bustleApp', [
 	'bustleApp.moreModule'
 ])
 
-.run(function($ionicPlatform) {
+.run(["$ionicPlatform", function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
 			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -35,9 +35,9 @@ angular.module('bustleApp', [
 			StatusBar.styleDefault();
 		}
 	});
-})
+}])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
 	// Ionic uses AngularUI Router which uses the concept of states
 	// Learn more here: https://github.com/angular-ui/ui-router
@@ -90,9 +90,10 @@ angular.module('bustleApp', [
 	// if none of the above states are matched, use this as the fallback
 	$urlRouterProvider.otherwise('/tab/map');
 
-});
+}]);
 
 },{"../app/list/listController":2,"../app/map/mapController":3,"../app/more/moreController":4,"../app/shared/directives/mapDirective":5,"../app/shared/services/busStopsService":6,"../app/shared/services/dataService":7,"../app/shared/services/geoService":8,"../app/shared/services/globals":9}],2:[function(require,module,exports){
+ListController.$inject = ["geoService", "busStopsService", "dataService"];
 module.exports = angular.module('bustleApp.listModule')
 	.controller('ListController', ListController);
 
@@ -140,6 +141,7 @@ function ListController(geoService, busStopsService, dataService) {
 	this.init();
 }
 },{}],3:[function(require,module,exports){
+MapController.$inject = ["geoService", "busStopsService", "dataService"];
 module.exports = angular.module('bustleApp.mapModule')
 	.controller('MapController', MapController);
 
@@ -216,6 +218,7 @@ function MapController(geoService, busStopsService, dataService) {
 	this.init();
 }
 },{}],4:[function(require,module,exports){
+MoreController.$inject = ["$scope"];
 module.exports = angular.module('bustleApp.moreModule')
 	.controller('MoreController', MoreController);
 
@@ -288,6 +291,7 @@ function uiMap() {
 	};
 }
 },{}],6:[function(require,module,exports){
+busStopsService.$inject = ["$http", "$httpParamSerializer", "globals"];
 module.exports = angular.module('bustleApp.services')
 	.factory('busStopsService', busStopsService);
 
@@ -340,6 +344,7 @@ function DataService() {
 }
 
 },{}],8:[function(require,module,exports){
+geoService.$inject = ["$q", "$window", "$rootScope"];
 module.exports = angular.module('bustleApp.services')
 	.factory('geoService', geoService);
 

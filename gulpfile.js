@@ -11,6 +11,7 @@ var browserify = require('browserify');
 var vinylSource = require('vinyl-source-stream');
 var plumber = require('gulp-plumber');
 var karma = require('gulp-karma');
+var ngAnnotate = require('gulp-ng-annotate');
 
 var paths = {
 	sass: ['./scss/**/*.scss'],
@@ -37,7 +38,7 @@ gulp.task('sass', function(done) {
 		.on('end', done);
 });
 
-gulp.task('install', ['git-check'], function() {
+gulp.task('install', function() {
 	return bower.commands.install()
 		.on('log', function(data) {
 			gutil.log('bower', gutil.colors.cyan(data.id), data.message);
@@ -58,6 +59,7 @@ gulp.task('browserify', function() {
 	return browserify('./www/app/app.js', {debug: true})
 		.bundle()
 		.pipe(vinylSource('bundle.js'))
+		.pipe(ngAnnotate())
 		.pipe(gulp.dest('./www/dist'));
 });
 

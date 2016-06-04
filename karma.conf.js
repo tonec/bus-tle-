@@ -21,8 +21,7 @@ module.exports = function(config) {
 		'./www/lib/underscore/underscore-min.js',
 		'./node_modules/angular-mocks/angular-mocks.js',
 		'./www/app/**/*.js',
-		'./www/app/**/*Spec.js',
-		'./www/common/**/*Spec.js',
+		'./www/app/**/*Spec.js'
 	],
 
 
