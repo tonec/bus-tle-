@@ -109,7 +109,7 @@
 		};
 
 		this.getPosition = function() {
-			geoService.getCurrentPosition()
+			geoService.gettingCurrentPosition()
 				.then(function(position) {
 					listVm.position = position;
 					listVm.getBusStopsNearby();
@@ -122,7 +122,7 @@
 		this.getBusStopsNearby = function() {
 			var coords = listVm.position.coords;
 
-			busStopsService.getLocal(coords)
+			busStopsService.gettingLocal(coords)
 				.then(function(response) {
 					listVm.busStopsData = dataService.busStopsData = response;
 					listVm.stops = response.data.stops;
@@ -222,75 +222,6 @@
 
 	/* ngInject */
 	function MoreController($scope) {}
-
-})();
-(function() {
-
-	angular.module('bustleApp.mapModule')
-		.directive('uiMap', uiMap);
-
-	/* ngInject */
-	function uiMap() {
-		return {
-			restrict: 'E',
-			template: '<div id="gmaps" class="map"></div>',
-			replace: true,
-			scope: {
-				options: '=',
-				markers: '='
-			},
-			link: function (scope, element, attr) {
-				var map;
-				var infoWindow;
-				var markers = [];
-				var mapOptions = scope.options;
-				var bounds = new google.maps.LatLngBounds();
-
-				(function initMap() {
-					if (map === void 0) {
-						map = new google.maps.Map(element[0], mapOptions);
-					}
-				})();
-
-				function setMarkers() {
-					angular.forEach(scope.markers, function(marker) {
-
-						var markerOptions = {
-							position: marker.position,
-							map: map,
-							title: marker.title,
-							icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
-						};
-
-						marker = new google.maps.Marker(markerOptions);
-						bounds.extend(marker.position);
-
-						google.maps.event.addListener(marker, 'click', function () {
-							var infoWindowOptions;
-
-							if (!infoWindow) {
-								infoWindow.close();
-							}
-
-							infoWindowOptions = {
-								content: marker.title
-							};
-
-							infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-							infoWindow.open(map, marker);
-						});
-
-					});
-				}
-
-				scope.$watch(attr.markers, function() {
-					setMarkers();
-					map.fitBounds(bounds);
-					map.panToBounds(bounds);
-				});
-			}
-		};
-	}
 
 })();
 (function() {
@@ -408,5 +339,74 @@
 				fromToType: '/uk/public/journey/from/{from}/to/{to}/{type}/{date}/{time}.json'
 			}
 		});
+
+})();
+(function() {
+
+	angular.module('bustleApp.mapModule')
+		.directive('uiMap', uiMap);
+
+	/* ngInject */
+	function uiMap() {
+		return {
+			restrict: 'E',
+			template: '<div id="gmaps" class="map"></div>',
+			replace: true,
+			scope: {
+				options: '=',
+				markers: '='
+			},
+			link: function (scope, element, attr) {
+				var map;
+				var infoWindow;
+				var markers = [];
+				var mapOptions = scope.options;
+				var bounds = new google.maps.LatLngBounds();
+
+				(function initMap() {
+					if (map === void 0) {
+						map = new google.maps.Map(element[0], mapOptions);
+					}
+				})();
+
+				function setMarkers() {
+					angular.forEach(scope.markers, function(marker) {
+
+						var markerOptions = {
+							position: marker.position,
+							map: map,
+							title: marker.title,
+							icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
+						};
+
+						marker = new google.maps.Marker(markerOptions);
+						bounds.extend(marker.position);
+
+						google.maps.event.addListener(marker, 'click', function () {
+							var infoWindowOptions;
+
+							if (!infoWindow) {
+								infoWindow.close();
+							}
+
+							infoWindowOptions = {
+								content: marker.title
+							};
+
+							infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+							infoWindow.open(map, marker);
+						});
+
+					});
+				}
+
+				scope.$watch(attr.markers, function() {
+					setMarkers();
+					map.fitBounds(bounds);
+					map.panToBounds(bounds);
+				});
+			}
+		};
+	}
 
 })();

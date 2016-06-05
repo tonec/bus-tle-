@@ -21,7 +21,7 @@
 		};
 
 		this.getPosition = function() {
-			geoService.getCurrentPosition()
+			geoService.gettingCurrentPosition()
 				.then(function(position) {
 					listVm.position = position;
 					listVm.getBusStopsNearby();
@@ -34,7 +34,7 @@
 		this.getBusStopsNearby = function() {
 			var coords = listVm.position.coords;
 
-			busStopsService.getLocal(coords)
+			busStopsService.gettingLocal(coords)
 				.then(function(response) {
 					listVm.busStopsData = dataService.busStopsData = response;
 					listVm.stops = response.data.stops;
