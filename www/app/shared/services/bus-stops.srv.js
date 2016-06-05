@@ -1,39 +1,42 @@
-module.exports = angular.module('bustleApp.services')
-	.factory('busStopsService', busStopsService);
+(function() {
 
-/* ngInject */
-function busStopsService($http, $httpParamSerializer, globals) {
+	angular.module('bustleApp.services')
+		.factory('busStopsService', busStopsService);
 
-	var busStopData = null;
+	/* ngInject */
+	function busStopsService($http, $httpParamSerializer, globals) {
 
-	function generateQueryObj(coords) {
+		var busStopData = null;
+
+		function generateQueryObj(coords) {
+			return {
+				lat: coords.latitude,
+				lon: coords.longitude,
+				app_key: globals.app_key,
+				app_id: globals.app_id
+			};
+		}
+
+		function getLocal(coords) {
+			var url = globals.api_url + globals.api_bus.near;
+
+			var data = $http({
+				method: 'GET',
+				url: url + '?' + $httpParamSerializer(generateQueryObj(coords))
+			});
+
+			return data.then(function(data) {
+				busStopData = data;
+				return data;
+			});
+		}
+
 		return {
-			lat: coords.latitude,
-			lon: coords.longitude,
-			app_key: globals.app_key,
-			app_id: globals.app_id
+			busStopData: busStopData,
+			getLocal: getLocal
 		};
+
 	}
 
-	function getLocal(coords) {
+})();
 
-		console.log(globals);
-		var url = globals.api_url + globals.api_bus.near;
-
-		var data = $http({
-			method: 'GET',
-			url: url + '?' + $httpParamSerializer(generateQueryObj(coords))
-		});
-
-		return data.then(function(data) {
-			busStopData = data;
-			return data;
-		});
-	}
-
-	return {
-		busStopData: busStopData,
-		getLocal: getLocal
-	};
-
-}

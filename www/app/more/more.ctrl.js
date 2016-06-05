@@ -1,5 +1,9 @@
-module.exports = angular.module('bustleApp.moreModule')
-	.controller('MoreController', MoreController);
+(function() {
 
-/* ngInject */
-function MoreController($scope) {}
+	angular.module('bustleApp.moreModule')
+		.controller('MoreController', MoreController);
+
+	/* ngInject */
+	function MoreController($scope) {}
+
+})();

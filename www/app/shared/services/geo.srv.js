@@ -1,29 +1,33 @@
-module.exports = angular.module('bustleApp.services')
-	.factory('geoService', geoService);
+(function() {
 
-/* ngInject */
-function geoService($q, $window, $rootScope) {
+	angular.module('bustleApp.services')
+		.factory('geoService', geoService);
 
-	var position = null;
+	/* ngInject */
+	function geoService($q, $window, $rootScope) {
 
-	function getCurrentPosition() {
-		var deferred = $q.defer();
+		var position = null;
 
-		$window.navigator.geolocation.getCurrentPosition(function(data) {
-			deferred.resolve(data);
-		}, function(error) {
-			deferred.reject(error);
-		});
+		function getCurrentPosition() {
+			var deferred = $q.defer();
 
-		deferred.promise.then(function(data) {
-			position = data;
-		});
+			$window.navigator.geolocation.getCurrentPosition(function(data) {
+				deferred.resolve(data);
+			}, function(error) {
+				deferred.reject(error);
+			});
 
-		return deferred.promise;
+			deferred.promise.then(function(data) {
+				position = data;
+			});
+
+			return deferred.promise;
+		}
+
+		return {
+			position: position,
+			getCurrentPosition: getCurrentPosition
+		};
 	}
 
-	return {
-		position: position,
-		getCurrentPosition: getCurrentPosition
-	};
-}
+})();

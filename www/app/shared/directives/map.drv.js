@@ -1,65 +1,69 @@
-module.exports = angular.module('bustleApp.mapModule')
-	.directive('uiMap', uiMap);
+(function() {
 
-/* ngInject */
-function uiMap() {
-	return {
-		restrict: 'E',
-		template: '<div id="gmaps" class="map"></div>',
-		replace: true,
-		scope: {
-			options: '=',
-			markers: '='
-		},
-		link: function (scope, element, attr) {
-			var map;
-			var infoWindow;
-			var markers = [];
-			var mapOptions = scope.options;
-			var bounds = new google.maps.LatLngBounds();
+	angular.module('bustleApp.mapModule')
+		.directive('uiMap', uiMap);
 
-			(function initMap() {
-				if (map === void 0) {
-					map = new google.maps.Map(element[0], mapOptions);
-				}
-			})();
+	/* ngInject */
+	function uiMap() {
+		return {
+			restrict: 'E',
+			template: '<div id="gmaps" class="map"></div>',
+			replace: true,
+			scope: {
+				options: '=',
+				markers: '='
+			},
+			link: function (scope, element, attr) {
+				var map;
+				var infoWindow;
+				var markers = [];
+				var mapOptions = scope.options;
+				var bounds = new google.maps.LatLngBounds();
 
-			function setMarkers() {
-				angular.forEach(scope.markers, function(marker) {
+				(function initMap() {
+					if (map === void 0) {
+						map = new google.maps.Map(element[0], mapOptions);
+					}
+				})();
 
-					var markerOptions = {
-						position: marker.position,
-						map: map,
-						title: marker.title,
-						icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
-					};
+				function setMarkers() {
+					angular.forEach(scope.markers, function(marker) {
 
-					marker = new google.maps.Marker(markerOptions);
-					bounds.extend(marker.position);
-
-					google.maps.event.addListener(marker, 'click', function () {
-						var infoWindowOptions;
-
-						if (!infoWindow) {
-							infoWindow.close();
-						}
-
-						infoWindowOptions = {
-							content: marker.title
+						var markerOptions = {
+							position: marker.position,
+							map: map,
+							title: marker.title,
+							icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
 						};
 
-						infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-						infoWindow.open(map, marker);
-					});
+						marker = new google.maps.Marker(markerOptions);
+						bounds.extend(marker.position);
 
+						google.maps.event.addListener(marker, 'click', function () {
+							var infoWindowOptions;
+
+							if (!infoWindow) {
+								infoWindow.close();
+							}
+
+							infoWindowOptions = {
+								content: marker.title
+							};
+
+							infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+							infoWindow.open(map, marker);
+						});
+
+					});
+				}
+
+				scope.$watch(attr.markers, function() {
+					setMarkers();
+					map.fitBounds(bounds);
+					map.panToBounds(bounds);
 				});
 			}
+		};
+	}
 
-			scope.$watch(attr.markers, function() {
-				setMarkers();
-				map.fitBounds(bounds);
-				map.panToBounds(bounds);
-			});
-		}
-	};
-}
+})();

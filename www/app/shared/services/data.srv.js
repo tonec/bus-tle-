@@ -1,9 +1,15 @@
-module.exports = angular.module('bustleApp.services')
-	.service('dataService', DataService);
+(function() {
 
-function DataService() {
-	return {
-		busStopsData: null,
-		stops: null
-	};
-}
+	angular.module('bustleApp.services')
+		.service('dataService', DataService);
+
+	function DataService() {
+		return {
+			busStopsData: null,
+			stops: null
+		};
+	}
+
+})();
+
+

@@ -10,7 +10,7 @@ module.exports = function(config) {
 
 	// frameworks to use
 	// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-	frameworks: ['jasmine', 'browserify'],
+	frameworks: ['jasmine'],
 
 
 	// list of files / patterns to load in the browser
@@ -20,9 +20,7 @@ module.exports = function(config) {
 		'./www/lib/underscore/underscore-min.js',
 		'./www/lib/underscore/underscore-min.js',
 		'./node_modules/angular-mocks/angular-mocks.js',
-		'./www/app/**/*.js',
-		'./www/app/**/*Spec.js',
-		'./www/common/**/*Spec.js',
+		'./www/app/**/*.js'
 	],
 
 
@@ -34,9 +32,6 @@ module.exports = function(config) {
 	// preprocess matching files before serving them to the browser
 	// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 	preprocessors: {
-		'./www/app/**/*.js': ['browserify'],
-		'./www/app/**/*Spec.js': ['browserify'],
-		'./www/common/**/*Spec.js': [ 'browserify' ]
 	},
 
 

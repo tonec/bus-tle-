@@ -7,14 +7,15 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var jshint = require('gulp-jshint');
-var browserify = require('browserify');
-var vinylSource = require('vinyl-source-stream');
 var plumber = require('gulp-plumber');
 var karma = require('gulp-karma');
 
 var paths = {
 	sass: ['./scss/**/*.scss'],
-	js: ['./www/app/**/*.js', './www/common/**/*.js']
+	js: [
+		'./www/app/**/*.js',
+		'!./www/app/**/*.spec.js'
+	]
 };
 
 var onError = function (err) {
@@ -54,10 +55,9 @@ gulp.task('lint', function() {
 		.pipe(jshint.reporter('fail'));
 });
 
-gulp.task('browserify', function() {
-	return browserify('./www/app/app.js', {debug: true})
-		.bundle()
-		.pipe(vinylSource('bundle.js'))
+gulp.task('concat', function() {
+	return gulp.src(paths.js)
+		.pipe(concat('bundle.js'))
 		.pipe(gulp.dest('./www/dist'));
 });
 
@@ -75,7 +75,7 @@ gulp.task('test', function() {
 
 gulp.task('watch', function() {
 	gulp.watch(paths.sass, ['sass']);
-	gulp.watch(paths.js, ['lint', 'browserify', 'test']);
+	gulp.watch(paths.js, ['lint', 'concat', 'test']);
 });
 
-gulp.task('default', ['sass', 'lint', 'browserify', 'test', 'watch']);
+gulp.task('default', ['sass', 'lint', 'concat', 'test', 'watch']);
