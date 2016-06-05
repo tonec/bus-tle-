@@ -6,13 +6,13 @@ angular.module('bustleApp.listModule', []);
 angular.module('bustleApp.moreModule', []);
 
 require('../app/shared/services/globals');
-require('../app/shared/services/geoService');
-require('../app/shared/services/busStopsService');
-require('../app/shared/services/dataService');
-require('../app/shared/directives/mapDirective');
-require('../app/map/mapController');
-require('../app/list/listController');
-require('../app/more/moreController');
+require('../app/shared/services/geo.srv');
+require('../app/shared/services/bus-stops.srv');
+require('../app/shared/services/data.srv');
+require('../app/shared/directives/map.drv');
+require('../app/map/map.ctrl');
+require('../app/list/list.ctrl');
+require('../app/more/more.ctrl');
 
 angular.module('bustleApp', [
 	'ionic',
@@ -48,7 +48,7 @@ angular.module('bustleApp', [
 	.state('tab', {
 		url: '/tab',
 		abstract: true,
-		templateUrl: 'app/tabs/tabs.html'
+		templateUrl: 'app/tabs/tabs.tpl.html'
 	})
 
 	// Each tab has its own nav history stack:
@@ -57,7 +57,7 @@ angular.module('bustleApp', [
 		url: '/map',
 		views: {
 			'tab-map': {
-				templateUrl: 'app/map/views/index.html',
+				templateUrl: 'app/map/map.tpl.html',
 				controller: 'MapController',
 				controllerAs: 'mapVm'
 			}
@@ -68,7 +68,7 @@ angular.module('bustleApp', [
 		url: '/list',
 		views: {
 			'tab-list': {
-				templateUrl: 'app/list/views/index.html',
+				templateUrl: 'app/list/list.tpl.html',
 				controller: 'ListController',
 				controllerAs: 'listVm'
 			}
@@ -79,7 +79,7 @@ angular.module('bustleApp', [
 		url: '/more',
 		views: {
 			'tab-more': {
-				templateUrl: 'app/more/views/index.html',
+				templateUrl: 'app/more/more.tpl.html',
 				controller: 'MoreController',
 				controllerAs: 'moreVm'
 			}

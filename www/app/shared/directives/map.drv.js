@@ -40,7 +40,7 @@ function uiMap() {
 					google.maps.event.addListener(marker, 'click', function () {
 						var infoWindowOptions;
 
-						if (infoWindow !== void 0) {
+						if (!infoWindow) {
 							infoWindow.close();
 						}
 
