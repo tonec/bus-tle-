@@ -161,7 +161,7 @@
 		};
 
 		this.getPosition = function() {
-			geoService.getCurrentPosition()
+			geoService.gettingCurrentPosition()
 				.then(function(position) {
 					mapVm.position = position;
 					mapVm.getBusStopsNearby();
@@ -174,7 +174,7 @@
 		this.getBusStopsNearby = function() {
 			var coords = mapVm.position.coords;
 
-			busStopsService.getLocal(coords)
+			busStopsService.gettingLocal(coords)
 				.then(function(response) {
 					mapVm.busStopsData = dataService.busStopsData = response;
 					mapVm.buildMap();
@@ -312,7 +312,7 @@
 			};
 		}
 
-		function getLocal(coords) {
+		function gettingLocal(coords) {
 			var url = globals.api_url + globals.api_bus.near;
 
 			var data = $http({
@@ -328,7 +328,7 @@
 
 		return {
 			busStopData: busStopData,
-			getLocal: getLocal
+			gettingLocal: gettingLocal
 		};
 
 	}
@@ -362,7 +362,7 @@
 
 		var position = null;
 
-		function getCurrentPosition() {
+		function gettingCurrentPosition() {
 			var deferred = $q.defer();
 
 			$window.navigator.geolocation.getCurrentPosition(function(data) {
@@ -380,7 +380,7 @@
 
 		return {
 			position: position,
-			getCurrentPosition: getCurrentPosition
+			gettingCurrentPosition: gettingCurrentPosition
 		};
 	}
 

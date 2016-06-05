@@ -8,7 +8,7 @@
 
 		var position = null;
 
-		function getCurrentPosition() {
+		function gettingCurrentPosition() {
 			var deferred = $q.defer();
 
 			$window.navigator.geolocation.getCurrentPosition(function(data) {
@@ -26,7 +26,7 @@
 
 		return {
 			position: position,
-			getCurrentPosition: getCurrentPosition
+			gettingCurrentPosition: gettingCurrentPosition
 		};
 	}
 

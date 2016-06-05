@@ -17,7 +17,7 @@
 			};
 		}
 
-		function getLocal(coords) {
+		function gettingLocal(coords) {
 			var url = globals.api_url + globals.api_bus.near;
 
 			var data = $http({
@@ -33,7 +33,7 @@
 
 		return {
 			busStopData: busStopData,
-			getLocal: getLocal
+			gettingLocal: gettingLocal
 		};
 
 	}

@@ -18,7 +18,7 @@ describe('mapController', function() {
 			});
 
 			$provide.factory('geoService', ['$q', function($q){
-				function getCurrentPosition() {
+				function gettingCurrentPosition() {
 					var position = {
 						coords: {
 							accuracy: 3012,
@@ -40,12 +40,12 @@ describe('mapController', function() {
 				}
 
 				return {
-					getCurrentPosition: getCurrentPosition
+					gettingCurrentPosition: gettingCurrentPosition
 				};
 			}]);
 
 			$provide.service('busStopsService', ['$q', function($q){
-				function getLocal() {
+				function gettingLocal() {
 					var response = {
 						data: {
 							maxlat: 51.641262,
@@ -92,7 +92,7 @@ describe('mapController', function() {
 				}
 
 				return {
-					getLocal: getLocal
+					gettingLocal: gettingLocal
 				};
 			}]);
 		});
@@ -102,8 +102,8 @@ describe('mapController', function() {
 		scope = _$rootScope_.$new();
 		$controller = _$controller_;
 
-		spyOn(_geoService_, 'getCurrentPosition').and.callThrough();
-		spyOn(_busStopsService_, 'getLocal').and.callThrough();
+		spyOn(_geoService_, 'gettingCurrentPosition').and.callThrough();
+		spyOn(_busStopsService_, 'gettingLocal').and.callThrough();
 
 		mapController = $controller('MapController as mapVm', {
 			$scope: scope,
