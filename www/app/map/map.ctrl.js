@@ -4,7 +4,7 @@
 		.controller('MapController', MapController);
 
 	/* ngInject */
-	function MapController(geoService, busStopsService, dataService) {
+	function MapController($scope, geoService, busStopsService, dataService) {
 		var mapVm = this;
 
 		this.position = null;
@@ -71,6 +71,11 @@
 			});
 
 			mapVm.markers = markers;
+		};
+
+		this.refresh = function() {
+			console.log('refresh');
+			$scope.$broadcast('refresh-map');
 		};
 
 		this.init();

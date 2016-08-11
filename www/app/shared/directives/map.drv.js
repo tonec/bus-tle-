@@ -57,10 +57,18 @@
 					});
 				}
 
-				scope.$watch(attr.markers, function() {
-					setMarkers();
+				function resetBounds() {
 					map.fitBounds(bounds);
 					map.panToBounds(bounds);
+				}
+
+				scope.$on('refresh-map', function() {
+					resetBounds();
+				});
+
+				scope.$watch(attr.markers, function() {
+					setMarkers();
+					resetBounds();
 				});
 			}
 		};
